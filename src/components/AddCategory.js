@@ -10,8 +10,18 @@ const AddCategory = ({ setCategories }) => {
         setInputValue(e.target.value);
     };
 
+    // Save the input value in the categories state
+    const handleFormSubmit = e => {
+        e.preventDefault();
+
+        if (inputValue.trim().length > 2) {
+            setCategories(prevCats => [inputValue, ...prevCats]);
+            setInputValue("");
+        }
+    };
+
     return (
-        <form>
+        <form onSubmit={handleFormSubmit}>
             <input
                 type="text"
                 value={inputValue}
