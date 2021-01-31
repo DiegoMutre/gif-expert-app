@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getGif } from "../helpers/helper";
 
 export const useFetchGif = category => {
     const [state, setState] = useState({
@@ -7,6 +8,16 @@ export const useFetchGif = category => {
     });
 
     useEffect(() => {
-        // Fetch the api here
+        const getData = async _ => {
+            const data = await getGif(category);
+            setState({
+                data,
+                loading: false,
+            });
+        };
+
+        getData();
     }, [category]);
+
+    return state;
 };
